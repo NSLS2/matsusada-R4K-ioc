@@ -9,9 +9,9 @@ epicsEnvSet("ENGINEER",  "C. Engineer")
 epicsEnvSet("LOCATION",  "LAB3")
 
 epicsEnvSet("IOCNAME",   "r4k")
-epicsEnvSet("SYS",       "XF:09IDA-BI")
+epicsEnvSet("SYS",       "XF:31ID1-BI")
 epicsEnvSet("DEV",       "{PWR:1}")
-epicsEnvSet("IOC_SYS",   "XF:09IDA-CT")
+epicsEnvSet("IOC_SYS",   "XF:31ID1-CT")
 epicsEnvSet("IOC_DEV",   "{IOC:$(IOCNAME)}")
 
 < envPaths
