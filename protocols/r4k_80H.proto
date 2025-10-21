@@ -1,0 +1,12 @@
+OutTerminator = CR;
+InTerminator = CR;
+LockTimeout = 5000;
+ReplyTimeout = 1000;
+ReadTimeout = 100;
+WriteTimeout = 100;
+ExtraInput = Ignore;
+
+init {
+	# Enable REMOTE control mode
+	out ""#0 REN ";
+}

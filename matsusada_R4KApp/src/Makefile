@@ -15,6 +15,11 @@ DBD += matsusada_R4K.dbd
 # matsusada_R4K.dbd will be made up from these files:
 matsusada_R4K_DBD += base.dbd
 
+matsusada_R4K_DBD += calc.dbd
+matsusada_R4K_DBD += stream.dbd
+matsusada_R4K_DBD += asyn.dbd
+matsusada_R4K_DBD += drvAsynIPPort.dbd
+
 matsusada_R4K_DBD += asSupport.dbd
 matsusada_R4K_DBD += devIocStats.dbd
 matsusada_R4K_DBD += reccaster.dbd
@@ -37,6 +42,9 @@ matsusada_R4K_SRCS_vxWorks += -nil-
 
 # Finally link to the EPICS Base libraries
 matsusada_R4K_LIBS += $(EPICS_BASE_IOC_LIBS)
+
+matsusada_R4K_LIBS += asyn calc stream
+
 matsusada_R4K_LIBS += autosave
 matsusada_R4K_LIBS += devIocStats
 matsusada_R4K_LIBS += reccaster
