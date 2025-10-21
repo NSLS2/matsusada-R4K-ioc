@@ -15,6 +15,10 @@ DBD += matsusada_R4K.dbd
 # matsusada_R4K.dbd will be made up from these files:
 matsusada_R4K_DBD += base.dbd
 
+matsusada_R4K_DBD += asSupport.dbd
+matsusada_R4K_DBD += devIocStats.dbd
+matsusada_R4K_DBD += reccaster.dbd
+
 # Include dbd files from all support applications:
 #matsusada_R4K_DBD += xxx.dbd
 
@@ -33,6 +37,18 @@ matsusada_R4K_SRCS_vxWorks += -nil-
 
 # Finally link to the EPICS Base libraries
 matsusada_R4K_LIBS += $(EPICS_BASE_IOC_LIBS)
+matsusada_R4K_LIBS += autosave
+matsusada_R4K_LIBS += devIocStats
+matsusada_R4K_LIBS += reccaster
+
+# Link QSRV (pvAccess Server) if available
+ifdef EPICS_QSRV_MAJOR_VERSION
+    matsusada_R4K_LIBS += qsrv
+    matsusada_R4K_LIBS += $(EPICS_BASE_PVA_CORE_LIBS)
+    matsusada_R4K_DBD += PVAServerRegister.dbd
+    matsusada_R4K_DBD += qsrv.dbd
+endif
+
 
 #===========================
 
