@@ -1,7 +1,108 @@
-record(bo, "$(Sys)$(Dev)T:Init-Cmd")
+record(bo, "$(Sys)$(Dev)Init-Cmd")
 {
     field(DTYP, "stream")
     field(DESC, "Init")
     field(OUT,  "@r4k_80H.proto init($(Chan)) $(PORT)")
     field(PINI, "1")
 }
+
+# Voltage readback
+record(ai, "$(Sys)$(Dev)V")
+{
+	field(DTYP, "stream")
+	field(DESC, "Voltage")
+	field(INP,  "@r4k_80H.proto ReadV($(Chan)) $(PORT)")
+	field(EGU,  "V")
+	field(PREC, ".001")
+	field(SCAN, ".1 second")
+}
+
+# Current readback
+record(ai, "$(Sys)$(Dev)I")
+{
+	field(DTYP, "stream")
+	field(DESC, "Current")
+	field(INP,  "@r4k_80H.proto ReadI($(Chan)) $(PORT)")
+	field(EGU,  "A")
+	field(PREC, ".001")
+	field(SCAN, ".1 second")
+}
+
+# Voltage setpoint
+record(ao, "$(Sys)$(Dev)V:SP")
+{
+	field(DTYP, "stream")
+	field(DESC, "Voltage SP")
+	field(OUT,  "@r4k_80H.proto WriteVSP($(Chan)) $(PORT)")
+	field(EGU,  "V")
+	field(PREC, ".001")
+    field(PINI, "1")
+    info(autosaveFields, "VAL")    
+}
+
+# Voltage setpoint RB
+record(ai, "$(Sys)$(Dev)V:SP-RB")
+{
+	field(DTYP, "stream")
+	field(DESC, "Voltage SP RBV")
+	field(INP,  "@r4k_80H.proto ReadVSP($(Chan)) $(PORT)")
+	field(EGU,  "V")
+	field(PREC, ".001")
+	field(SCAN, ".1 second")
+}
+
+# Current setpoint
+record(ao, "$(Sys)$(Dev)I:SP")
+{
+	field(DTYP, "stream")
+	field(DESC, "Current SP")
+	field(OUT,  "@r4k_80H.proto WriteISP($(Chan)) $(PORT)")
+	field(EGU,  "A")
+	field(PREC, ".001")
+    field(PINI, "1")
+    info(autosaveFields, "VAL")    
+}
+
+# Current setpoint RB
+record(ai, "$(Sys)$(Dev)I:SP-RB")
+{
+	field(DTYP, "stream")
+	field(DESC, "Current SP RBV")
+	field(INP,  "@r4k_80H.proto ReadISP($(Chan)) $(PORT)")
+	field(EGU,  "A")
+	field(PREC, ".001")
+	field(SCAN, ".1 second")
+}
+
+# Output enable
+record(bo, "$(Sys)$(Dev)OUTPUT")
+{
+	field(DTYP, "stream")
+	field(DESC, "Output enable")
+    field(ZNAM, "Off")
+    field(ONAM, "On")    
+	field(OUT,  "@r4k_80H.proto WriteOutputEnable($(Chan)) $(PORT)")
+    field(PINI, "1")
+    info(autosaveFields, "VAL")    
+}
+
+# Output enable RB
+record(bi, "$(Sys)$(Dev)OUTPUT-RB")
+{
+	field(DTYP, "stream")
+	field(DESC, "Output enable RBV")
+    field(ZNAM, "Off")
+    field(ONAM, "On")    
+	field(INP,  "@r4k_80H.proto ReadOutputEnable($(Chan)) $(PORT)")
+	field(SCAN, ".1 second")
+}
+
+# Status
+record(stringin, "$(Sys)$(Dev)STS")
+{
+	field(DTYP, "stream")
+	field(DESC, "Device status")
+	field(INP,  "@r4k_80H.proto ReadSTS($(Chan)) $(PORT)")
+	field(SCAN, ".1 second")
+}
+

@@ -26,7 +26,6 @@ epicsEnvSet ("STREAM_PROTOCOL_PATH", "${TOP}/protocols")
 
 # Controller-specific variables
 epicsEnvSet("PORT","matsu-px")
-epicsEnvSet("DEV","{RG:T}")
 epicsEnvSet("IP","10.69.57.80:10001")
 
 drvAsynIPPortConfigure("$(PORT)", "$(IP)")

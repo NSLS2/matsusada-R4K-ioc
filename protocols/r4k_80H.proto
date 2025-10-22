@@ -8,5 +8,57 @@ ExtraInput = Ignore;
 
 init {
 	# Enable REMOTE control mode
-	out "#$1 REN";
+	out "#\$1 REN";
 }
+
+# Voltage readback
+ReadV {
+    out "#\$1 VGET";
+    in "VGET=%f";
+}
+
+# Current readback
+ReadI {
+    out "#\$1 IGET";
+    in "IGET=%f";
+}
+
+# Voltage setpoint - write
+WriteVSP {
+    out "#\$1 VSET %f";
+}
+
+# Voltage setpoint - read
+ReadVSP {
+    out "#\$1 VSET?";
+    in "VSET=%f";
+}
+
+# Current setpoint - write
+WriteISP {
+    out "#\$1 ISET %f";
+}
+
+# Current setpoint - read
+ReadISP {
+    out "#\$1 ISET?";
+    in "ISET=%f";
+}
+
+# Current setpoint - write
+WriteOutputEnable {
+    out "#\$1 SW%d";
+}
+
+# Current setpoint - read
+ReadOutputEnable {
+    out "#\$1 SW?";
+    in "SW%d";
+}
+
+# Status
+ReadSTS {
+    out "#\$1 STS";
+    in "#\$1 %[A-Z ]";
+}
+
