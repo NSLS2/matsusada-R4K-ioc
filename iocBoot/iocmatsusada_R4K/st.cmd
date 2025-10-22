@@ -7,9 +7,10 @@ epicsEnvSet("LOCATION",  "LAB3")
 
 epicsEnvSet("IOCNAME",   "r4k")
 epicsEnvSet("SYS",       "XF:31ID1-BI")
-epicsEnvSet("DEV",       "{PWR:1}")
+epicsEnvSet("DEV",       "{PW:1}")
 epicsEnvSet("IOC_SYS",   "XF:31ID1-CT")
 epicsEnvSet("IOC_DEV",   "{IOC:$(IOCNAME)}")
+epicsEnvSet("CHAN", 0)
 
 < envPaths
 
@@ -21,7 +22,7 @@ matsusada_R4K_registerRecordDeviceDriver pdbbase
 
 
 ## Streamdevice Protocol Path
-epicsEnvSet ("STREAM_PROTOCOL_PATH", "protocols")
+epicsEnvSet ("STREAM_PROTOCOL_PATH", "${TOP}/protocols")
 
 # Controller-specific variables
 epicsEnvSet("PORT","matsu-px")
@@ -31,7 +32,9 @@ epicsEnvSet("IP","10.69.57.80:10001")
 drvAsynIPPortConfigure("$(PORT)", "$(IP)")
 
 ## Load record instances
-dbLoadRecords("db/R4K_80H.db", "Sys=${SYS},Dev=${DEV},PORT=${PORT}")
+dbLoadRecords("db/R4K_80H.db", "Sys=${SYS},Dev=${DEV},Chan=${CHAN},PORT=${PORT}")
+dbLoadRecords("db/asynRecord.db","P=$(IOC_SYS),R=$(IOC_DEV)Asyn,PORT=$(PORT),ADDR=0,IMAX=256,OMAX=256")
+
 
 epicsEnvSet("IOC_PREFIX", "$(IOC_SYS)$(IOC_DEV)")
 
@@ -45,5 +48,9 @@ dbLoadRecords("${RECCASTER}/db/reccaster.db", "P=${IOC_PREFIX}RecSync")
 #- Run this to trace the stages of iocInit
 #traceIocInit
 
-cd "${TOP}/iocBoot/${IOC}"
+set_pass0_restoreFile("info_positions.sav")
+set_pass0_restoreFile("info_settings.sav")
+set_pass1_restoreFile("info_settings.sav")
+
+# cd "${TOP}/iocBoot/${IOC}"
 iocInit

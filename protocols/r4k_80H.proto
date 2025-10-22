@@ -8,5 +8,5 @@ ExtraInput = Ignore;
 
 init {
 	# Enable REMOTE control mode
-	out ""#0 REN ";
+	out "#0 REN";
 }
