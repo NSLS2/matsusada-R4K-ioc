@@ -2,9 +2,6 @@
 
 <xf31id1-lab3-ioc1-netsetup.cmd
 
-#- You may have to change matsusada_R4K to something else
-#- everywhere it appears in this file
-
 epicsEnvSet("ENGINEER",  "C. Engineer")
 epicsEnvSet("LOCATION",  "LAB3")
 
@@ -34,7 +31,7 @@ epicsEnvSet("IP","10.69.57.80:10001")
 drvAsynIPPortConfigure("$(PORT)", "$(IP)")
 
 ## Load record instances
-dbLoadRecords("db/R4K_80H.db", "P=${SYS},R=${DEV}")
+dbLoadRecords("db/R4K_80H.db", "Sys=${SYS},Dev=${DEV},PORT=${PORT}")
 
 epicsEnvSet("IOC_PREFIX", "$(IOC_SYS)$(IOC_DEV)")
 
