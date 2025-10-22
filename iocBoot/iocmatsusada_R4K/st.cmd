@@ -48,9 +48,25 @@ dbLoadRecords("${RECCASTER}/db/reccaster.db", "P=${IOC_PREFIX}RecSync")
 #- Run this to trace the stages of iocInit
 #traceIocInit
 
+set_savefile_path("$(TOP)/as/save")
+set_requestfile_path("$(TOP)/as/req")
+
 set_pass0_restoreFile("info_positions.sav")
 set_pass0_restoreFile("info_settings.sav")
 set_pass1_restoreFile("info_settings.sav")
 
-# cd "${TOP}/iocBoot/${IOC}"
 iocInit
+
+makeAutosaveFileFromDbInfo("$(TOP)/as/req/info_settings.req", "autosaveFields")
+makeAutosaveFileFromDbInfo("$(TOP)/as/req/info_positions.req", "autosaveFields_pass0")
+
+create_monitor_set("info_positions.req", 5 , "")
+create_monitor_set("info_settings.req", 15 , "")
+
+# Set terminators for ASYN record
+dbpf $(IOC_SYS)$(IOC_DEV)Asyn.OEOS "\r"
+dbpf $(IOC_SYS)$(IOC_DEV)Asyn.IEOS "\r"
+
+#cd ${TOP}
+dbl > ./records.dbl
+
