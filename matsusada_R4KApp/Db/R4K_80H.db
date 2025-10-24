@@ -97,12 +97,60 @@ record(bi, "$(Sys)$(Dev)OUTPUT-RB")
 	field(SCAN, ".1 second")
 }
 
-# Status
+# Status string. The string contains status codes separated by SP.
+# EXAMPLE: CO RM CV
+# STATUS CODES:
+# CF - Output cut off status
+# CO - Output enable status
+# LO - Local mode
+# RM - Remote mode
+# CC - Constant current mode
+# CV - Constant voltage mode
+# OVP - Over voltage protection
+# OCP - Over current protection
+# OT - Over temperature protection
+# ACF - AC input fault
+# RS - Sense reverse connect
+# LD - Inter Lock off
 record(stringin, "$(Sys)$(Dev)STS")
 {
 	field(DTYP, "stream")
 	field(DESC, "Device status")
 	field(INP,  "@r4k_80H.proto ReadSTS($(Chan)) $(PORT)")
 	field(SCAN, ".1 second")
+    field(FLNK, "$(Sys)$(Dev)STS:BITS_")	
 }
 
+# Convert status string to status BITS
+record(aSub, "$(Sys)$(Dev)STS:BITS_")
+{
+	field(DESC, "Device status (BITS)")
+	field(INAM, "aSub_R4K_80_STS_Init")
+	field(SNAM, "aSub_R4K_80_STS_Proc")
+	field(INPA, "$(Sys)$(Dev)STS")
+    field(FTA, "STRING")
+    field(NOA, "50")
+	field(OUTA, "$(Sys)$(Dev)STS:BITS")
+	field(FTVA, "SHORT")
+	field(NOVA, "1")
+    field(FLNK, "$(Sys)$(Dev)STS:BITS")	
+}
+
+# Status bits:
+# Bit 0:  CF - Output cut off status
+# Bit 1:  CO - Output enable status
+# Bit 2:  LO - Local mode
+# Bit 3:  RM - Remote mode
+# Bit 4:  CC - Constant current mode
+# Bit 5:  CV - Constant voltage mode
+# Bit 6:  OVP - Over voltage protection
+# Bit 7:  OCP - Over current protection
+# Bit 8:  OT - Over temperature protection
+# Bit 9:  ACF - AC input fault
+# Bit 10: RS - Sense reverse connect
+# Bit 11: LD - Inter Lock off
+record(ai, "$(Sys)$(Dev)STS:BITS")
+{
+	field(DESC, "Device status (BITS)")
+	field(INP,  "$(Sys)$(Dev)STS:BITS_.VALA")
+}
