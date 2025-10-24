@@ -13,6 +13,11 @@ epicsEnvSet("IOC_DEV",   "{IOC:$(IOCNAME)}")
 epicsEnvSet("MODEL", "R4K_80")
 epicsEnvSet("CHAN", 0)
 
+epicsEnvSet("PORT","matsu-px")
+epicsEnvSet("HOST","10.69.57.80:10001")
+
+epicsEnvSet("IOC_PREFIX", "$(IOC_SYS)$(IOC_DEV)")
+
 < envPaths
 
 cd "${TOP}"
@@ -24,18 +29,12 @@ matsusada_R4K_registerRecordDeviceDriver pdbbase
 ## Streamdevice Protocol Path
 epicsEnvSet ("STREAM_PROTOCOL_PATH", "${TOP}/protocols")
 
-# Controller-specific variables
-epicsEnvSet("PORT","matsu-px")
-epicsEnvSet("IP","10.69.57.80:10001")
 
-drvAsynIPPortConfigure("$(PORT)", "$(IP)")
+drvAsynIPPortConfigure("$(PORT)", "$(HOST)")
 
 ## Load record instances
 dbLoadRecords("db/${MODEL}.db", "Sys=${SYS},Dev=${DEV},Chan=${CHAN},PORT=${PORT}")
 dbLoadRecords("db/asynRecord.db","P=$(IOC_SYS),R=$(IOC_DEV)Asyn,PORT=$(PORT),ADDR=0,IMAX=256,OMAX=256")
-
-
-epicsEnvSet("IOC_PREFIX", "$(IOC_SYS)$(IOC_DEV)")
 
 dbLoadRecords("$(DEVIOCSTATS)/db/iocAdminSoft.db", "IOC=${IOC_PREFIX}")
 dbLoadRecords("$(AUTOSAVE)/db/save_restoreStatus.db", "P=${IOC_PREFIX}")
