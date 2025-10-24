@@ -8,7 +8,7 @@ include $(TOP)/configure/CONFIG
 # databases, templates, substitutions like this
 #DB += xxx.db
 
-DB += R4K_80H.db
+DB += R4K_80.db
 DB += asynRecord.db
 
 #----------------------------------------------------

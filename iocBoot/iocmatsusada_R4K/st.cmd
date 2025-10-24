@@ -20,7 +20,6 @@ cd "${TOP}"
 dbLoadDatabase("dbd/matsusada_R4K.dbd")
 matsusada_R4K_registerRecordDeviceDriver pdbbase
 
-
 ## Streamdevice Protocol Path
 epicsEnvSet ("STREAM_PROTOCOL_PATH", "${TOP}/protocols")
 
@@ -31,7 +30,7 @@ epicsEnvSet("IP","10.69.57.80:10001")
 drvAsynIPPortConfigure("$(PORT)", "$(IP)")
 
 ## Load record instances
-dbLoadRecords("db/R4K_80H.db", "Sys=${SYS},Dev=${DEV},Chan=${CHAN},PORT=${PORT}")
+dbLoadRecords("db/R4K_80.db", "Sys=${SYS},Dev=${DEV},Chan=${CHAN},PORT=${PORT}")
 dbLoadRecords("db/asynRecord.db","P=$(IOC_SYS),R=$(IOC_DEV)Asyn,PORT=$(PORT),ADDR=0,IMAX=256,OMAX=256")
 
 
