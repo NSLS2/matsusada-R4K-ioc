@@ -10,6 +10,7 @@ epicsEnvSet("SYS",       "XF:31ID1-BI")
 epicsEnvSet("DEV",       "{PW:1}")
 epicsEnvSet("IOC_SYS",   "XF:31ID1-CT")
 epicsEnvSet("IOC_DEV",   "{IOC:$(IOCNAME)}")
+epicsEnvSet("MODEL", "R4K_80")
 epicsEnvSet("CHAN", 0)
 
 < envPaths
@@ -30,7 +31,7 @@ epicsEnvSet("IP","10.69.57.80:10001")
 drvAsynIPPortConfigure("$(PORT)", "$(IP)")
 
 ## Load record instances
-dbLoadRecords("db/R4K_80.db", "Sys=${SYS},Dev=${DEV},Chan=${CHAN},PORT=${PORT}")
+dbLoadRecords("db/${MODEL}.db", "Sys=${SYS},Dev=${DEV},Chan=${CHAN},PORT=${PORT}")
 dbLoadRecords("db/asynRecord.db","P=$(IOC_SYS),R=$(IOC_DEV)Asyn,PORT=$(PORT),ADDR=0,IMAX=256,OMAX=256")
 
 
