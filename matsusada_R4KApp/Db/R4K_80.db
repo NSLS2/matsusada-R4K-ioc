@@ -74,6 +74,53 @@ record(ai, "$(Sys)$(Dev)I:SP-RB")
 	field(SCAN, ".1 second")
 }
 
+# Over Voltage Protection (OVP)
+record(ao, "$(Sys)$(Dev)OVP")
+{
+	field(DTYP, "stream")
+	field(DESC, "Over Voltage Protection")
+	field(OUT,  "@R4K_80.proto WriteOVP($(Chan)) $(PORT)")
+	field(EGU,  "V")
+	field(PREC, ".001")
+    field(PINI, "1")
+    info(autosaveFields, "VAL")    
+}
+
+# Over Voltage Protection (OVP) RB
+record(ai, "$(Sys)$(Dev)OVP-RB")
+{
+	field(DTYP, "stream")
+	field(DESC, "Over Voltage Protection RBV")
+	field(INP,  "@R4K_80.proto ReadOVP($(Chan)) $(PORT)")
+	field(EGU,  "V")
+	field(PREC, ".001")
+	field(SCAN, ".1 second")
+}
+
+# Over Current Protection (OCP)
+record(ao, "$(Sys)$(Dev)OCP")
+{
+	field(DTYP, "stream")
+	field(DESC, "Over Current Protection")
+	field(OUT,  "@R4K_80.proto WriteOCP($(Chan)) $(PORT)")
+	field(EGU,  "A")
+	field(PREC, ".001")
+    field(PINI, "1")
+    info(autosaveFields, "VAL")    
+}
+
+# Over Current Protection (OCP) RB
+record(ai, "$(Sys)$(Dev)OCP-RB")
+{
+	field(DTYP, "stream")
+	field(DESC, "Over Current Protection RBV")
+	field(INP,  "@R4K_80.proto ReadOCP($(Chan)) $(PORT)")
+	field(EGU,  "A")
+	field(PREC, ".001")
+	field(SCAN, ".1 second")
+}
+
+
 # Output enable
 record(bo, "$(Sys)$(Dev)OUTPUT")
 {

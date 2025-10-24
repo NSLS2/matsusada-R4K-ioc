@@ -45,18 +45,40 @@ ReadISP {
     in "ISET=%f";
 }
 
-# Current setpoint - write
+# OVP (Over Voltage Protection) - write
+WriteOVP {
+    out "#\$1 OVPSET %f";
+}
+
+# OVP (Over Voltage Protection) - read
+ReadOVP {
+    out "#\$1 OVPSET?";
+    in "OVPSET=%f";
+}
+
+# OCP (Over Current Protection) - write
+WriteOCP {
+    out "#\$1 OCPSET %f";
+}
+
+# OCP (Over Current Protection) - read
+ReadOCP {
+    out "#\$1 OCPSET?";
+    in "OCPSET=%f";
+}
+
+# Output Enable - write
 WriteOutputEnable {
     out "#\$1 SW%d";
 }
 
-# Current setpoint - read
+# Output Enable - read
 ReadOutputEnable {
     out "#\$1 SW?";
     in "SW%d";
 }
 
-# Status
+# Status (Read the whole string)
 ReadSTS {
     out "#\$1 STS";
     in "#\$1 %[A-Z ]";
